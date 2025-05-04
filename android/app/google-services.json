@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1088708711360",
+    "project_id": "fbtut-6d11c",
+    "storage_bucket": "fbtut-6d11c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088708711360:android:e073aa997a6216739d2e25",
+        "android_client_info": {
+          "package_name": "com.jnis.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyyfBxFvEzCeJ79qOEYm0LhIMxhiZ0Buc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
