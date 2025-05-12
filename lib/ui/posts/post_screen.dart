@@ -18,6 +18,7 @@ class _PostScreenState extends State<PostScreen> {
   final auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Post');
   final searchFilterController = TextEditingController();
+  final editController = TextEditingController();
 
 
 
@@ -95,6 +96,34 @@ class _PostScreenState extends State<PostScreen> {
                     return ListTile(
                       title: Text(snapshot.child('title').value.toString()),
                       subtitle: Text(snapshot.child('id').value.toString()),
+                      trailing: PopupMenuButton(
+                        icon: Icon(Icons.more_vert),
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                              onTap: (){
+
+                                showMyDialog(title,snapshot.child('id').value.toString());
+                              },
+                                value: 1,
+                                child: ListTile(
+                                  leading: Icon(Icons.edit),
+                                  title: Text('edit'),
+                                )
+                            ),
+                            PopupMenuItem(
+                                onTap: (){
+
+                                  ref.child(snapshot.child('id').value.toString()).remove();
+                                },
+                                value: 1,
+                                child: ListTile(
+                                  leading: Icon(Icons.delete_outlined),
+                                  title: Text('delete'),
+                                )
+                            )
+                          ],
+                      ),
+
                     );
 
                   }else if (title.toLowerCase().contains(searchFilterController.text.toLowerCase().toString())) {
@@ -119,5 +148,50 @@ class _PostScreenState extends State<PostScreen> {
           child: Icon(Icons.add, color: Colors.white,),
           ),
     );
+  }
+
+
+  Future<void> showMyDialog(String title, String id) async{
+    editController.text = title;
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('update'),
+          content: Container(
+            child: TextField(
+              controller: editController,
+              decoration: InputDecoration(
+                hintText: 'Edit'
+              ),
+
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel')),
+            TextButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                  ref.child(id).update({
+                    'title' : editController.text.toString()
+                  }).then((value){
+                    Utils().toastMessage('Post updated');
+                    
+                  }).onError((error, stackTrace){
+                    Utils().toastMessage(error.toString());
+                  });
+                },
+                child: Text('Update')),
+
+          ],
+        );
+      },
+    );
+
   }
 }

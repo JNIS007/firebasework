@@ -6,7 +6,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/ui/auth/login_screen.dart';
+import 'package:untitled/ui/firestore/firestore_list_screen.dart';
 import 'package:untitled/ui/posts/post_screen.dart';
+import 'package:untitled/ui/upload_image.dart';
 
 class  SplashServices{
 

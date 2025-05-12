@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/ui/auth/forgot_password.dart';
 import 'package:untitled/ui/auth/login_with_phone_number.dart';
 import 'package:untitled/ui/auth/signup_screen.dart';
 import 'package:untitled/ui/posts/post_screen.dart';
@@ -128,7 +129,15 @@ class _LoginScreenState extends State<LoginScreen> {
               }
             },
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 10,),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgotPasswordScreen()));
+                
+              }, child: Text('Forgot password')),
+            ),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -145,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 )
               ],
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(height: 20,),
             InkWell(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginWithPhoneNumber()));
